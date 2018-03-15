@@ -5,10 +5,13 @@
   <description>The husky_highlevel_controller package</description>
   <maintainer email="dominic.jud@mavt.ethz.ch">Dominic Jud</maintainer>
   <license>BSD</license>
-  <author email="dominic.jud@mavt.ethz.ch">Dominic Jud</author>
+  <author email="dominic.jud@mavt.ethz.ch">
+  	Dominic Jud
+  	</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
   <depend>roscpp</depend>
   <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
 </package>

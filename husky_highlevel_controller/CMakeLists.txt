@@ -26,6 +26,7 @@ catkin_package(
   CATKIN_DEPENDS 
     roscpp
     sensor_msgs
+    geometry_msgs
 #  DEPENDS 
 )
 
