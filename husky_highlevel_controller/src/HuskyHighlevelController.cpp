@@ -38,6 +38,15 @@ void HuskyHighlevelController::calc_least_dist(const sensor_msgs::LaserScan& dat
 		 count = i;
 	 }
  }
+ geometry_msgs::TransformStamped transformStamped;
+ try {
+  transformStamped = this->buffer1.lookupTransform("odom", "base_laser", ros::Time(0));
+ } catch (tf2::TransformException &exception) {
+ 	 ROS_WARN("%s", exception.what());
+ 	 ros::Duration(1.0).sleep();
+ 	 //continue;
+ }
+
  float kp =0.9;
  double alpha = data.angle_min + count * data.angle_increment;
 
@@ -52,9 +61,9 @@ void HuskyHighlevelController::calc_least_dist(const sensor_msgs::LaserScan& dat
  ros::Publisher vis_pub = nodeHandle_.advertise<visualization_msgs::Marker>( "visualization_marker", 0 );
  // create visualization
  visualization_msgs::Marker marker;
- marker.header.frame_id = "base_laser";
+ marker.header.frame_id = "odom";
  marker.header.stamp = ros::Time();
- marker.ns = "my_namespace";
+ marker.ns = "husky_highlevel_controller";
  marker.id = 0;
  marker.type = visualization_msgs::Marker::SPHERE;
  marker.action = visualization_msgs::Marker::ADD;
@@ -88,6 +97,8 @@ void HuskyHighlevelController::calc_least_dist(const sensor_msgs::LaserScan& dat
  ROS_INFO("divs: %f", (data.angle_max - data.angle_min) / data.angle_increment);
  ROS_INFO("len: %f", len);
  */
-}
+
 
 } /* namespace */
+
+}
